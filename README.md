@@ -29,7 +29,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 3. `touch /etc/sudoers.d/grader`
 4. `nano /etc/sudoers.d/grader`, type in `grader ALL=(ALL:ALL) ALL`, save and quit
 
-## 3.1 Set ssh login using keys
+### 3.1 Set ssh login using keys
 1. generate keys on local machine using`ssh-keygen` ; then save the private key in `~/.ssh` on local machine
 2. deploy public key to your lightsail server
 
@@ -48,7 +48,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	
 3. reload SSH using `service ssh restart`
 
-## 3.2 Validate and login as grader with your new access
+### 3.2 Validate and login as grader with your new access
 4. now you can use ssh to login with the new user you created
 
 	`ssh -i [privateKeyFilename] grader@35.182.177.173`
