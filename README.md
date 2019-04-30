@@ -59,21 +59,21 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	sudo apt-get update
 	sudo apt-get upgrade
 
-## 4.2 Configure the local timezone to UTC
+### 4.2 Configure the local timezone to UTC
 1. Configure the time zone `sudo dpkg-reconfigure tzdata`
 2. It is already set to UTC.
 
-## Modify Lightsail Network setting to enable Port 2200
+### 4.3 Modify Lightsail Network setting to enable Port 2200
 1. Open the AWS panel on https://lightsail.aws.amazon.com/
 2. Follow the steps to add a custom rule to enable port 2200
 3. Reboot server
 * Source: https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/blob/master/Blocked_SSH_port/README.md#extra-step-to-enable-on-aws-panel
 
-## Change the SSH port from 22 to 2200
+### 4.4 Change the SSH port from 22 to 2200
 1. Use `sudo nano /etc/ssh/sshd_config` and then change Port 22 to Port 2200 , save & quit.
 2. Reload SSH using `sudo service ssh restart`
 
-## Configure the Uncomplicated Firewall (UFW)
+### 4.5 Configure the Uncomplicated Firewall (UFW)
 Configure the Uncomplicated Firewall (UFW) to only allow incoming connections for SSH (port 2200), HTTP (port 80), and NTP (port 123)
 
 	sudo ufw allow 2200/tcp
@@ -81,13 +81,13 @@ Configure the Uncomplicated Firewall (UFW) to only allow incoming connections fo
 	sudo ufw allow 123/udp
 	sudo ufw enable 
  
-
-## Install and configure Apache to serve a Python mod_wsgi application
+## 5. Install Package Dependencies and Item Catalog
+### 5.1 Install and configure Apache to serve a Python mod_wsgi application
 1. Install Apache `sudo apt-get install apache2`
 2. Install mod_wsgi `sudo apt-get install python-setuptools libapache2-mod-wsgi`
 3. Restart Apache `sudo service apache2 restart`
 
-## Install and configure PostgreSQL
+### 5.2 Install and configure PostgreSQL
 1. Install PostgreSQL `sudo apt-get install postgresql`
 2. Check if no remote connections are allowed `sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
 3. Login as user "postgres" `sudo su - postgres`
@@ -115,50 +115,52 @@ Configure the Uncomplicated Firewall (UFW) to only allow incoming connections fo
 	exit
 	```
 
-## Clone the Catalog app from Github
-* Install git using: sudo apt-get install git
-* cd /var/www
-* sudo mkdir catalog
-* Change owner of the newly created catalog folder sudo chown -R grader:grader catalog
-* cd /catalog
-* Clone your project from github git clone https://github.com/lmidy/FSND-ItemCatalog.git catalog
-###LEFT OFF HERE
-* Create a catalog.wsgi file, then add this inside:
-import sys
-import logging
-logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0, "/var/www/catalog/")
+### 5.3 Clone the Catalog app from Github
+1. Install git using, create catalog directory: 
+``` sudo apt-get install git
+	cd /var/www
+	sudo mkdir catalog
+```
+2. Change owner of the newly created catalog folder 
+```sudo chown -R grader:grader catalog
+```
+3. Clone your item catalog project
+```cd /catalog
+	git clone https://github.com/lmidy/FSND-ItemCatalog.git catalog
+```
 
-from catalog import app as application
-application.secret_key = 'supersecretkey'
-* Rename application.py to init.py mv application.py __init__.py
+### 5.5 
+1. Create a catalog.wsgi file, then add this inside:
 
-11. 
+```	import sys
+	import logging
+	logging.basicConfig(stream=sys.stderr)
+	sys.path.insert(0, "/var/www/catalog/")
+	from catalog import app as application
+	application.secret_key = 'supersecretkey'
+```
 
-* Create a catalog.wsgi file, then add this inside:
-import sys
-import logging
-logging.basicConfig(stream=sys.stderr)
-sys.path.insert(0, "/var/www/catalog/")
+2. Rename application.py to init.py mv application.py __init__.py
 
-from catalog import app as application
-application.secret_key = 'supersecretkey'
-* Rename application.py to init.py mv application.py __init__.py
-11. Install virtual environment
-* Install the virtual environment sudo pip install virtualenv
-* Create a new virtual environment with sudo virtualenv venv
-* Activate the virutal environment source venv/bin/activate
-* Change permissions sudo chmod -R 777 venv
-12. Install Flask and other dependencies
-* Install pip with sudo apt-get install python-pip
-* Install Flask pip install Flask
-* Install other project dependencies sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils
-13. Update path of client_secrets.json file
-* nano __init__.py
-* Change client_secrets.json path to /var/www/catalog/catalog/client_secrets.json
-14. Configure and enable a new virtual host
-* Run this: sudo nano /etc/apache2/sites-available/catalog.conf
-* Paste this code:
+### 5.6 Install virtual environment
+1. Install the virtual environment sudo pip install virtualenv
+2. Create a new virtual environment with sudo virtualenv venv
+3. Activate the virutal environment source venv/bin/activate
+4. Change permissions sudo chmod -R 777 venv
+
+### 5.7 Install Flask and other dependencies
+1. Install pip with sudo apt-get install python-pip
+2.  Install Flask pip install Flask
+3. Install other project dependencies sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils
+
+### 5.8 Update path of client_secrets.json file
+1. nano __init__.py
+2. Change client_secrets.json path to /var/www/catalog/catalog/client_secrets.json
+
+### 5.9 Configure and enable a new virtual host
+1. Run this: sudo nano /etc/apache2/sites-available/catalog.conf
+2. Paste this code:
+```
 <VirtualHost *:80>
     ServerName 35.167.27.204
     ServerAlias ec2-35-167-27-204.us-west-2.compute.amazonaws.com
@@ -179,8 +181,10 @@ application.secret_key = 'supersecretkey'
     LogLevel warn
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
-* Enable the virtual host sudo a2ensite catalog
-15. Install and configure PostgreSQL
+```
+3. Enable the virtual host sudo a2ensite catalog
+
+### 5.10 Install and configure PostgreSQL
 * sudo apt-get install libpq-dev python-dev
 * sudo apt-get install postgresql postgresql-contrib
 * sudo su - postgres
@@ -196,16 +200,22 @@ application.secret_key = 'supersecretkey'
 * Change create engine line in your __init__.py and database_setup.py to: engine = create_engine('postgresql://catalog:password@localhost/catalog')
 * python /var/www/catalog/catalog/database_setup.py
 * Make sure no remote connections to the database are allowed. Check if the contents of this file sudo nano /etc/postgresql/9.3/main/pg_hba.conf looks like this:
+```
 local   all             postgres                                peer
 local   all             all                                     peer
 host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
-16. Restart Apache
-* sudo service apache2 restart
-17. Visit site at http://35.167.27.204
+```
+
+### 5.10 Restart Apache
+1.  
+```sudo service apache2 restart
+```
+
+### 5.11 Visit site at http://35.167.27.204
 
 ###TO REMOVE
-## Configure and Enable a New Virtual Host
+### Configure and Enable a New Virtual Host
 1. Create FlaskApp.conf to edit: `sudo nano /etc/apache2/sites-available/FlaskApp.conf`
 2. Add the following lines of code to the file to configure the virtual host. 
 	
@@ -230,7 +240,7 @@ host    all             all             ::1/128                 md5
 	```
 3. Enable the virtual host with the following command: `sudo a2ensite FlaskApp`
 
-## Create the .wsgi File
+### Create the .wsgi File
 1. Create the .wsgi File under /var/www/FlaskApp: 
 	
 	```
@@ -245,13 +255,12 @@ host    all             all             ::1/128                 md5
 	import logging
 	logging.basicConfig(stream=sys.stderr)
 	sys.path.insert(0,"/var/www/FlaskApp/")
-
 	from FlaskApp import app as application
 	application.secret_key = 'Add your secret key'
 	```
 
-## Restart Apache
+### Restart Apache
 1. Restart Apache `sudo service apache2 restart `
 
-## References:
+### References:
 https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
