@@ -17,7 +17,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	```chmod 600 ~/.ssh/somelightsailkey```
 4. In your terminal, type in
 	```ssh -i ~/.ssh/somelightsailkey ubuntu@35.182.177.173```
-reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-new-amazon-lightsail-instance-from-my-mac
+* reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-new-amazon-lightsail-instance-from-my-mac
 
 ## Create a new user named grader
 1. `sudo adduser grader`
@@ -57,10 +57,10 @@ reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 2. It is already set to UTC.
 
 ## Modify Lightsail Network setting to enable Port 2200
-1.Open the AWS panel on https://lightsail.aws.amazon.com/
+1. Open the AWS panel on https://lightsail.aws.amazon.com/
 2. Follow the steps to add a custom rule to enable port 2200
-2. Reboot server
-Source: https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/blob/master/Blocked_SSH_port/README.md#extra-step-to-enable-on-aws-panel
+3. Reboot server
+* Source: https://github.com/jungleBadger/-nanodegree-linux-server-troubleshoot/blob/master/Blocked_SSH_port/README.md#extra-step-to-enable-on-aws-panel
 
 ## Change the SSH port from 22 to 2200
 1. Use `sudo nano /etc/ssh/sshd_config` and then change Port 22 to Port 2200 , save & quit.
