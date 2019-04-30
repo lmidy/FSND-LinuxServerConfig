@@ -7,9 +7,13 @@ You will take a baseline installation of a Linux server and prepare it to host y
 ## LightSail Server Information
 * IP Address: 35.182.177.173
 * Accessible port: 2200
-* Application URL: TODO
+* Application URL: [http://ec2-34-182-177-173.us-west-2.compute.amazonaws.com/](http://ec2-34-182-177-1737.us-west-2.compute.amazonaws.com/)
 
-## Instructions for SSH access to the LightSail instance
+## 1-Get your server
+1. Start a new Ubuntu Linux server instance on Amazon Lightsail. There are full details on setting up your Lightsail instance on the next page.
+2. 
+
+## 2-SSH into your server
 1. Download LightSail Key 
 2. Move the key file into the folder `~/.ssh` (where ~ is your environment's home directory). So if you downloaded the file to the Downloads folder, just execute the following command in your terminal.
 	```mv ~/Downloads/somelightsailkey ~/.ssh/```
@@ -19,13 +23,13 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	```ssh -i ~/.ssh/somelightsailkey ubuntu@35.182.177.173```
 * reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-new-amazon-lightsail-instance-from-my-mac
 
-## Create a new user named grader
+## 3-Give grader access
 1. `sudo adduser grader`
 2. `nano /etc/sudoers`
 3. `touch /etc/sudoers.d/grader`
 4. `nano /etc/sudoers.d/grader`, type in `grader ALL=(ALL:ALL) ALL`, save and quit
 
-## Set ssh login using keys
+## 3.1 Set ssh login using keys
 1. generate keys on local machine using`ssh-keygen` ; then save the private key in `~/.ssh` on local machine
 2. deploy public key to your lightsail server
 
@@ -43,16 +47,19 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	```
 	
 3. reload SSH using `service ssh restart`
+
+## 3.2 Validate and login as grader with your new access
 4. now you can use ssh to login with the new user you created
 
 	`ssh -i [privateKeyFilename] grader@35.182.177.173`
 
-## Update all currently installed packages
+## 4 Prepare your environment
+### 4.1 Update all currently installed packages
 
 	sudo apt-get update
 	sudo apt-get upgrade
 
-## Configure the local timezone to UTC
+## 4.2 Configure the local timezone to UTC
 1. Configure the time zone `sudo dpkg-reconfigure tzdata`
 2. It is already set to UTC.
 
