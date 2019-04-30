@@ -17,6 +17,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 	```chmod 600 ~/.ssh/somelightsailkey```
 4. In your terminal, type in
 	```ssh -i ~/.ssh/somelightsailkey ubuntu@35.182.177.173```
+reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-new-amazon-lightsail-instance-from-my-mac
 
 ## Create a new user named grader
 1. `sudo adduser grader`
