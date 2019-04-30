@@ -5,9 +5,9 @@ This is the fifth project for "Full Stack Web Developer Nanodegree" on Udacity.
 You will take a baseline installation of a Linux server and prepare it to host your web applications. You will secure your server from a number of attack vectors, install and configure a database server, and deploy one of your existing web applications onto it.In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website.
 
 ## LightSail Server Information
-IP Address: 35.182.177.173
-Accessible port: 2200
-Application URL: TODO
+* IP Address: 35.182.177.173
+* Accessible port: 2200
+* Application URL: TODO
 
 ## Instructions for SSH access to the LightSail instance
 1. Download LightSail Key 
