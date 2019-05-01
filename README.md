@@ -219,4 +219,4 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 
 ### References:
 1. https://www.digitalocean.com/community/tutorials/how-to-deploy-a-flask-application-on-an-ubuntu-vps
-2. 
+2. https://github.com/iliketomatoes/linux_server_configuration 
