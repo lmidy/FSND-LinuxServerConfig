@@ -86,12 +86,12 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 ## 10 Install Apache, mod_wsgi 
 1. Install Apache `$ sudo apt-get install apache2`
 2. Install mod_wsgi `$ sudo apt-get install python-setuptools libapache2-mod-wsgi`
+3. Install additional libraries `$ sudo apt-get install libapache2-mod-wsgi python-dev`
 3. Enable mod_wsgi `$ sudo a2enmod wsgi`
 4. Restart Apache `$ sudo service apache2 restart`
 	
 ## 11 Install git, clone your Catalog app
-1. Install git, create catalog directory: 
-	``` 
+1. Install git
 	$ sudo apt-get install git
 	$ cd /var/www
 	$ sudo mkdir catalog
@@ -107,8 +107,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	git clone https://github.com/lmidy/FSND-ItemCatalog.git catalog
 	```
 
-## 12 Create catalog.wsgi file
-1. Create a catalog.wsgi file, then add this inside:
+4. Create a catalog.wsgi file, then add this inside:
 
 	```	
 	import sys
@@ -117,7 +116,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	sys.path.insert(0, "/var/www/catalog/")
 	
 	from catalog import app as application
-	application.secret_key = 'supersecretkey'
+	application.secret_key = 'super_secret_key'
 	```
 
 2. Rename application.py to init.py mv application.py __init__.py
