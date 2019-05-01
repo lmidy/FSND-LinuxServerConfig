@@ -5,9 +5,10 @@ This is the fifth project for "Full Stack Web Developer Nanodegree" on Udacity.
 You will take a baseline installation of a Linux server and prepare it to host your web applications. You will secure your server from a number of attack vectors, install and configure a database server, and deploy one of your existing web applications onto it.In this project, a Linux virtual machine needs to be configurated to support the Item Catalog website.
 
 ## LightSail Server Information
-* IP Address: 35.182.177.173
+* IP Address: 35.182.139.148
+* Grudget catalog link http://35.182.139.148/
 * Accessible port: 2200
-* Application URL: [ec2-35-182-177-173.ca-central-1.compute.amazonaws.com/](ec2-35-182-177-173.ca-central-1.compute.amazonaws.com/)
+* Application URL: http://ec2-35-182-139-148.ca-central-1.compute.amazonaws.com
 
 ## 1 SSH into your server
 1. Start a new Ubuntu Linux server instance on Amazon Lightsail https://lightsail.aws.amazon.com/ Download LightSail Key 
@@ -16,7 +17,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 3. Open your terminal and type in
 	```chmod 600 ~/.ssh/somelightsailkey```
 4. In your terminal, type in
-	```ssh -i ~/.ssh/somelightsailkey ubuntu@35.182.177.173```
+	```ssh -i ~/.ssh/somelightsailkey ubuntu@35.182.139.148```
 Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-new-amazon-lightsail-instance-from-my-mac
 
 ## 2 Give grader access
@@ -45,7 +46,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 3. reload SSH using `service ssh restart`
 4. now you can use ssh to login with the new user you created
 
-	`$ ssh -i [privateKeyFilename] grader@35.182.177.173`
+	`$ ssh -i [privateKeyFilename] grader@35.182.139.148`
 
 ## 4 Enforce key-based authentication
 1.	$ sudo nano /etc/ssh/sshd_config. Find the PasswordAuthentication line and edit it to no.
@@ -92,6 +93,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	
 ## 11 Install git, clone your Catalog app
 1. Install git
+	```
 	$ sudo apt-get install git
 	$ cd /var/www
 	$ sudo mkdir catalog
@@ -120,7 +122,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	application.secret_key = 'super_secret_key' 
 	```
 
-2. Rename finalproject.py
+2. Rename final_project.py
 `$ mv final_project.py __init__.py
 
 ## 13 Install virtual environment
@@ -133,13 +135,14 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 
 ## 14 Install Flask and other dependencies
 1. Install Flask `$ pip install Flask
-3. Install other project dependencies 
+2. Install other project dependencies 
 	```
-	$ sudo pip install httplib2 oauth2client sqlalchemy psycopg2 sqlalchemy_utils
+	$ sudo pip install -r requirements.txt
 	```
+3. sudo apt-get -qqy install postgresql python-psycopg2
 
 ## 15 Update path of client_secrets.json file
-
+1.
 2. Change client_secrets.json path to /var/www/catalog/catalog/client_secrets.json
 
 ## 16 Configure catalog virtual host and enable
@@ -148,8 +151,8 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 ```
 <VirtualHost *:80>
     ServerName 35.182.139.148
-    ServerAlias ec2-35-182-177-173.ca-central-1.compute.amazonaws.com
-    ServerAdmin admin@35.182.139.148
+    ServerAlias ec2-35-182-139-148.ca-central-1.compute.amazonaws.com
+    ServerAdmin ubuntu@35.182.139.148
     WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
     WSGIProcessGroup catalog
     WSGIScriptAlias / /var/www/catalog/catalog.wsgi
@@ -169,23 +172,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 ```
 3. Enable the virtual host `$ sudo a2ensite catalog`
 
-##  17 Install and configure PostgreSQL
-```
-* sudo apt-get install libpq-dev python-dev
-* sudo apt-get install postgresql postgresql-contrib
-* sudo su - postgres
-* psql
-* CREATE USER catalog WITH PASSWORD 'password';
-* ALTER USER catalog CREATEDB;
-* CREATE DATABASE catalog WITH OWNER catalog;
-* \c catalog
-* REVOKE ALL ON SCHEMA public FROM public;
-* GRANT ALL ON SCHEMA public TO catalog;
-* \q
-* exit
-* Change create engine line in your __init__.py and database_setup.py to: engine = create_engine('postgresql://catalog:password@localhost/catalog')
-* python /var/www/catalog/catalog/database_setup.py
-```
+
 ## 13 Install and configure PostgreSQL
 1. Install PostgreSQL `$ sudo apt-get install postgresql`
 2. Check if no remote connections are allowed `$ sudo vim /etc/postgresql/9.3/main/pg_hba.conf`
@@ -213,14 +200,10 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	```
 	exit
 	```
-9. * Make sure no remote connections to the database are allowed. Check if the contents of this file `sudo nano /etc/postgresql/9.3/main/pg_hba.conf` looks like this:
-	
-	```
-	local   all             postgres                                peer
-	local   all             all                                     peer
-	host    all             all             127.0.0.1/32            md5
-	host    all             all             ::1/128                 md5
-	```
+9. Change create engine line in your __init__.py, database_setup.py, lotsofgrudges.py to:` engine = create_engine('postgresql://catalog:password@localhost/catalog')`
+10. `$ sudo python database_setup.py`
+11. `$ sudo python lotsofgrudges.py`
+12. `$ sudo service apache2 restart`
 
 ## Update OAuth authorized javascript origins
 1. add the URL to the authorized URI on google admin pages
