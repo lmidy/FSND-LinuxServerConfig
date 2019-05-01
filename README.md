@@ -7,7 +7,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 ## LightSail Server Information
 * IP Address: 35.182.177.173
 * Accessible port: 2200
-* Application URL: [http://ec2-34-182-177-173.us-west-2.compute.amazonaws.com/](http://ec2-34-182-177-1737.us-west-2.compute.amazonaws.com/)
+* Application URL: [ec2-35-182-177-173.ca-central-1.compute.amazonaws.com/](ec2-35-182-177-173.ca-central-1.compute.amazonaws.com/)
 
 ## 1 SSH into your server
 1. Start a new Ubuntu Linux server instance on Amazon Lightsail https://lightsail.aws.amazon.com/ Download LightSail Key 
@@ -110,16 +110,18 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 4. Create a catalog.wsgi file, then add this inside:
 
 	```	
+	#!/usr/bin/python
 	import sys
 	import logging
 	logging.basicConfig(stream=sys.stderr)
-	sys.path.insert(0, "/var/www/catalog/")
-	
+	sys.path.insert(0,"/var/www/catalog")
+
 	from catalog import app as application
-	application.secret_key = 'super_secret_key'
+	application.secret_key = 'super_secret_key' 
 	```
 
-2. Rename application.py to init.py mv application.py __init__.py
+2. Rename finalproject.py
+`$ mv final_project.py __init__.py
 
 ## 13 Install virtual environment
 1. Install pip, so you can install python pacakages `$ sudo apt-get install python-pip` 
@@ -137,16 +139,16 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	```
 
 ## 15 Update path of client_secrets.json file
-1. nano __init__.py
+
 2. Change client_secrets.json path to /var/www/catalog/catalog/client_secrets.json
 
-## 16 Configure and enable a new virtual host
+## 16 Configure catalog virtual host and enable
 1. Run this: `$ sudo nano /etc/apache2/sites-available/catalog.conf`
 2. Paste this code:
 ```
 <VirtualHost *:80>
     ServerName 35.182.139.148
-    ServerAlias ec2-35-182-139-247.us-west-2.compute.amazonaws.com
+    ServerAlias ec2-35-182-177-173.ca-central-1.compute.amazonaws.com
     ServerAdmin admin@35.182.139.148
     WSGIDaemonProcess catalog python-path=/var/www/catalog:/var/www/catalog/venv/lib/python2.7/site-packages
     WSGIProcessGroup catalog
