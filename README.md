@@ -123,7 +123,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	```
 
 2. Rename final_project.py
-`$ mv final_project.py __init__.py
+`$ mv final_project.py __init__.py`
 
 ## 13 Install virtual environment
 1. Install pip, so you can install python pacakages `$ sudo apt-get install python-pip` 
