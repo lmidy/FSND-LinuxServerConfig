@@ -48,6 +48,30 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 
 	`$ ssh -i [privateKeyFilename] grader@35.182.139.148`
 	
+	Your screen should looke this like this
+	```
+	$ ssh -i linuxCourse -p 2200 grader@35.182.139.148
+	grader@35.182.139.148's password: 
+	Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-1079-aws x86_64)
+
+	 * Documentation:  https://help.ubuntu.com
+ 	* Management:     https://landscape.canonical.com
+	 * Support:        https://ubuntu.com/advantage
+
+ 	 Get cloud support with Ubuntu Advantage Cloud Guest:
+ 	   http://www.ubuntu.com/business/services/cloud
+
+	12 packages can be updated.
+	0 updates are security updates.
+
+	New release '18.04.2 LTS' available.
+	Run 'do-release-upgrade' to upgrade to it.
+
+
+	Last login: Thu May  2 11:02:05 2019 from 73.210.12.195
+	grader@ip-172-26-6-16:~$ 
+	```
+	
 
 ## 4 Enforce key-based authentication
 1.	$ sudo nano /etc/ssh/sshd_config. Find the PasswordAuthentication line and edit it to no.
