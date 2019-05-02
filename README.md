@@ -74,7 +74,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	```
 	
 
-## 4 (NOT IMPLEMENTED) Enforce key-based authentication
+## 4 Enforce key-based authentication
 1.	$ sudo nano /etc/ssh/sshd_config. Find the PasswordAuthentication line and edit it to no.
 2.	$ sudo service ssh restart.
 
