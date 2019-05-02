@@ -46,7 +46,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 3. reload SSH using `service ssh restart`
 4. now you can use ssh to login with the new user you created
 
-	`$ ssh -i ~/.ssh/linuxCourse -p 2200 grader@52.34.208.247.`
+	`$ ssh -i linuxCourse -p 2200 grader@35.182.139.148`
 	
 	Your screen should looke this like this
 	```
