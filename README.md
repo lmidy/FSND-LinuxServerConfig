@@ -47,6 +47,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 4. now you can use ssh to login with the new user you created
 
 	`$ ssh -i [privateKeyFilename] grader@35.182.139.148`
+	
 
 ## 4 Enforce key-based authentication
 1.	$ sudo nano /etc/ssh/sshd_config. Find the PasswordAuthentication line and edit it to no.
