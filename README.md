@@ -46,7 +46,7 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 3. reload SSH using `service ssh restart`
 4. now you can use ssh to login with the new user you created
 
-	`$ ssh -i [privateKeyFilename] grader@35.182.139.148`
+	`$ ssh -i ~/.ssh/linuxCourse -p 2200 grader@52.34.208.247.`
 	
 	Your screen should looke this like this
 	```
@@ -54,12 +54,12 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 	grader@35.182.139.148's password: 
 	Welcome to Ubuntu 16.04.6 LTS (GNU/Linux 4.4.0-1079-aws x86_64)
 
-	 * Documentation:  https://help.ubuntu.com
+	* Documentation:  https://help.ubuntu.com
  	* Management:     https://landscape.canonical.com
-	 * Support:        https://ubuntu.com/advantage
+	* Support:        https://ubuntu.com/advantage
 
- 	 Get cloud support with Ubuntu Advantage Cloud Guest:
- 	   http://www.ubuntu.com/business/services/cloud
+ 	Get cloud support with Ubuntu Advantage Cloud Guest:
+ 	http://www.ubuntu.com/business/services/cloud
 
 	12 packages can be updated.
 	0 updates are security updates.
