@@ -9,6 +9,7 @@ You will take a baseline installation of a Linux server and prepare it to host y
 * Grudget catalog link http://35.182.139.148/
 * Accessible port: 2200
 * Application URL: http://ec2-35-182-139-148.ca-central-1.compute.amazonaws.com
+* passphrase for grader: Udacity
 
 ## 1 SSH into your server
 1. Start a new Ubuntu Linux server instance on Amazon Lightsail https://lightsail.aws.amazon.com/ Download LightSail Key 
