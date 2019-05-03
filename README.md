@@ -87,6 +87,10 @@ Reference: https://stackoverflow.com/questions/46028907/how-do-i-connect-to-a-ne
 1. 	$ sudo apt-get update
 2.	$ sudo apt-get upgrade
 
+# 6.1 Configure the server to handle unattended upgrades automatically
+1.  	$ sudo apt-get install unattended-upgrades
+2.	$ sudo dpkg-reconfigure unattended-upgrades
+
 ## 7 Configure the local timezone to UTC
 1. Configure the time zone `sudo dpkg-reconfigure tzdata`
 2. It is already set to UTC.
